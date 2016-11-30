@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package artifacia;
+package com.mycompany.artifacia_client;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,7 +18,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import org.json.simple.JSONObject;
+import javax.json.JsonObject;
 
 /**
  *
@@ -50,7 +50,7 @@ public class Client {
         
         this.api_key = api_key;
     }
-    public void visual_recommendation(int prodid, int num){
+    public void visual_recommendation(String prodid, int num){
         System.out.println(api_key);
         URL url;
         try {
@@ -76,16 +76,18 @@ public class Client {
             // wr.close();
 
             String line;
+            System.out.println("fdsf");
             conn.getInputStream();
-            StringBuffer response;
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-                String inputLine;
-                response = new StringBuffer();
-                while ((inputLine = reader.readLine()) != null) {
-                    response.append(inputLine);
-                }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = reader.readLine()) != null) {
+                response.append(inputLine);
             }
+            reader.close();
             System.out.println(response.toString());
+
 
         }
         catch (IOException e) {
@@ -93,7 +95,7 @@ public class Client {
 
         }
     }
-    public void upload_item_data(JSONObject data){
+    public void upload_item_data(JsonObject data){
         URL url;
         try {
             url = new URL("https://api.artifacia.com/v1/items");
@@ -109,19 +111,27 @@ public class Client {
             // Send post request
             conn.setDoOutput(true);
             
-            try (BufferedWriter httpRequestBodyWriter = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()))) {
-                httpRequestBodyWriter.write(data.toJSONString());
+            try  {
+                BufferedWriter httpRequestBodyWriter = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+                httpRequestBodyWriter.write(data.toString());
+            }catch (IOException e) {
+            // TODO Auto-generated catch block
+
             }
 
             String line;
             conn.getInputStream();
-            StringBuffer response;
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+            StringBuffer response = null;
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String inputLine;
                 response = new StringBuffer();
                 while ((inputLine = reader.readLine()) != null) {
                     response.append(inputLine);
                 }
+            }catch (IOException e) {
+            // TODO Auto-generated catch block
+
             }
             System.out.println(response.toString());
 
@@ -131,7 +141,7 @@ public class Client {
 
         }
     }
-    public void upload_user_purchased_items(int userid, JSONObject data){
+    public void upload_user_purchased_items(int userid, JsonObject data){
         URL url;
         try {
             url = new URL("https://api.artifacia.com/v1/users/"+userid+"/purchased_items");
@@ -146,19 +156,27 @@ public class Client {
             // Send post request
             conn.setDoOutput(true);
             
-            try (BufferedWriter httpRequestBodyWriter = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()))) {
-                httpRequestBodyWriter.write(data.toJSONString());
+            try {
+                BufferedWriter httpRequestBodyWriter = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+                httpRequestBodyWriter.write(data.toString());
+            }catch (IOException e) {
+            // TODO Auto-generated catch block
+
             }
 
             String line;
             conn.getInputStream();
-            StringBuffer response;
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+            StringBuffer response = null;
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String inputLine;
                 response = new StringBuffer();
                 while ((inputLine = reader.readLine()) != null) {
                     response.append(inputLine);
                 }
+            }catch (IOException e) {
+            // TODO Auto-generated catch block
+
             }
             System.out.println(response.toString());
 
@@ -168,7 +186,7 @@ public class Client {
 
         }
     }
-    public void upload_user_viewed_items(int userid, JSONObject data){
+    public void upload_user_viewed_items(int userid, JsonObject data){
         URL url;
         try {
             url = new URL("https://api.artifacia.com/v1/users/"+userid+"/viewed_items");
@@ -182,20 +200,28 @@ public class Client {
             conn.setRequestProperty ("api_key", api_key);
             // Send post request
             conn.setDoOutput(true);
-            
-            try (BufferedWriter httpRequestBodyWriter = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()))) {
-                httpRequestBodyWriter.write(data.toJSONString());
+            System.out.println(data);
+            try  {
+                BufferedWriter httpRequestBodyWriter = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+                httpRequestBodyWriter.write(data.toString());
+            }catch (IOException e) {
+            // TODO Auto-generated catch block
+
             }
 
             String line;
             conn.getInputStream();
-            StringBuffer response;
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+            StringBuffer response = null;
+            try  {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String inputLine;
                 response = new StringBuffer();
                 while ((inputLine = reader.readLine()) != null) {
                     response.append(inputLine);
                 }
+            }catch (IOException e) {
+            // TODO Auto-generated catch block
+
             }
             System.out.println(response.toString());
 
@@ -228,13 +254,16 @@ public class Client {
 
             String line;
             conn.getInputStream();
-            StringBuffer response;
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+            StringBuffer response = null;
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String inputLine;
                 response = new StringBuffer();
                 while ((inputLine = reader.readLine()) != null) {
                     response.append(inputLine);
                 }
+            }catch(IOException e){
+                
             }
             System.out.println(response.toString());
 
@@ -267,13 +296,16 @@ public class Client {
 
             String line;
             conn.getInputStream();
-            StringBuffer response;
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+            StringBuffer response = null;
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String inputLine;
                 response = new StringBuffer();
                 while ((inputLine = reader.readLine()) != null) {
                     response.append(inputLine);
                 }
+            }catch(IOException e){
+                
             }
             System.out.println(response.toString());
 
