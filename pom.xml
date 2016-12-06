@@ -2,8 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
     <groupId>com.artifacia</groupId>
-    <artifactId>artifacia</artifactId>
-    <version>0.1</version>
+    <artifactId>artifacia-client</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+     <packaging>jar</packaging>
     <name>Artifacia recommendation API client</name>
     <description>Java client for Artifacia recommendation API</description>
     <url>https://github.com/artifacia/artifacia-client-java</url>
@@ -17,6 +18,14 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <developers>
+        <developer>
+            <name>Ashish</name>
+            <email>ashish@artifacia.com</email>
+            <organization>Artifacia</organization>
+            <organizationUrl>http://www.artifacia.com</organizationUrl>
+        </developer>
+    </developers>
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
@@ -24,10 +33,46 @@
     </parent>
     <scm>
         <connection>scm:git:git@github.com:artifacia/artifacia-client-java.git</connection>
-        <url>scm:git:git@github.com:artifacia/artifacia-client-java.git</url>
         <developerConnection>scm:git:git@github.com:artifacia/artifacia-client-java.git</developerConnection>
-        <tag>HEAD</tag>
+        <url>git@github.com:artifacia/artifacia-client-java.git</url>
     </scm>
+    <build>
+      <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.9</version>
+            <executions>
+                <execution>
+                    <id>attach-javadocs</id>
+                    <goals>
+                        <goal>jar</goal>
+                    </goals>
+                    <configuration>
+                        <additionalparam>${javadoc.opts}</additionalparam>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <reportPlugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-javadoc-plugin</artifactId>
+              <configuration>
+                <additionalparam>${javadoc.opts}</additionalparam>
+              </configuration>
+            </plugin>
+          </reportPlugins>
+        </configuration>
+      </plugin>
+   </plugins>
+</build>
+
   <dependencies>
     <dependency>
         <groupId>javax.json</groupId>
@@ -39,7 +84,7 @@
         <artifactId>json_exmp</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </dependency>
-    <dependency>
+ <dependency>
         <groupId>org.glassfish</groupId>
         <artifactId>javax.json</artifactId>
         <version>1.0.4</version>
