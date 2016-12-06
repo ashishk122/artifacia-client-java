@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
     <groupId>com.artifacia</groupId>
     <artifactId>artifacia-client</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
      <packaging>jar</packaging>
     <name>Artifacia recommendation API client</name>
     <description>Java client for Artifacia recommendation API</description>
@@ -36,42 +36,21 @@
         <developerConnection>scm:git:git@github.com:artifacia/artifacia-client-java.git</developerConnection>
         <url>git@github.com:artifacia/artifacia-client-java.git</url>
     </scm>
-    <!-- <build>
-      <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.9</version>
-            <executions>
-                <execution>
-                    <id>attach-javadocs</id>
-                    <goals>
-                        <goal>jar</goal>
-                    </goals>
-                    <configuration>
-                        <additionalparam>${javadoc.opts}</additionalparam>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
+    <build>
+  <plugins>
     <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <reportPlugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-javadoc-plugin</artifactId>
-              <configuration>
-                <additionalparam>${javadoc.opts}</additionalparam>
-              </configuration>
-            </plugin>
-          </reportPlugins>
-        </configuration>
+      <artifactId>maven-release-plugin</artifactId>
+      <version>2.4.2</version>
+      <dependencies>
+        <dependency>
+          <groupId>org.apache.maven.scm</groupId>
+          <artifactId>maven-scm-provider-gitexe</artifactId>
+          <version>1.8.1</version>
+        </dependency>
+       </dependencies>
       </plugin>
-   </plugins>
-</build> -->
+    </plugins>
+</build>
 
   <dependencies>
     <dependency>
