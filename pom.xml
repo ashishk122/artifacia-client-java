@@ -79,11 +79,11 @@
         <artifactId>javax.json-api</artifactId>
         <version>1.0</version>
     </dependency>
-    <dependency>
+    <!-- <dependency>
         <groupId>json_exmp</groupId>
         <artifactId>json_exmp</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-    </dependency>
+    </dependency> -->
  <dependency>
         <groupId>org.glassfish</groupId>
         <artifactId>javax.json</artifactId>
